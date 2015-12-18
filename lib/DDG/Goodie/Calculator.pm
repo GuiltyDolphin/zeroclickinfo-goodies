@@ -131,7 +131,7 @@ handle query_nowhitespace => sub {
             name       => 'Answer',
             data       => {
                 title => "$result",
-                subtitle => $generated_input . ' = ' . $result,
+                subtitle => "Calculate: $generated_input",
             },
             templates => {
               group => 'text',
