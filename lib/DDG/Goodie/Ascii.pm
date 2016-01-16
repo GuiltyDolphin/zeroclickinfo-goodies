@@ -3,15 +3,26 @@ package DDG::Goodie::Ascii;
 
 use strict;
 use DDG::Goodie;
+with 'DDG::GoodieRole::WhatIs';
 
 triggers end => "ascii";
 
 zci answer_type => "ascii_conversion";
 zci is_cached   => 1;
 
-handle remainder => sub {
-    my $ascii = pack("B*", $1) if /^(([0-1]{8})*)\s+(in|to)$/;
-    my $binary = $1;
+my $matcher = wi_translation({
+    groups => ['conversion'],
+    options => {
+        primary => qr/([01]{8})*/,
+        to    => 'ascii',
+    },
+});
+
+handle query_raw => sub {
+    my $query = $_;
+    my $result = $matcher->match($query);
+    my $binary = $result->{value};
+    my $ascii = pack("B*", $binary);
 
     return unless $ascii;
 
