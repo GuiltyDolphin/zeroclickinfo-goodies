@@ -21,7 +21,7 @@ my $matcher = wi_translation({
 handle query_raw => sub {
     my $query = $_;
     my $result = $matcher->match($query);
-    my $binary = $result->{value};
+    my $binary = $result->{primary};
     my $ascii = pack("B*", $binary);
 
     return unless $ascii;
