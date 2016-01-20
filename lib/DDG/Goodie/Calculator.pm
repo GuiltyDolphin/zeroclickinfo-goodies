@@ -988,7 +988,7 @@ sub irrational {
 # Constants go here.
 new_symbol_constant {
     forms => 'pi',
-    rep   => 'π',
+    rep   => 'pi',
     value => irrational($big_pi),
 };
 new_word_constant {
